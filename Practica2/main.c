@@ -1,3 +1,4 @@
+// Programa para controlar el llenado de cisternas con 3 sensores y controlar una bannda transportadora con interrupciones
 #include <msp430.h> 
 
 char on=0;
@@ -10,12 +11,12 @@ int main(void)
 	WDTCTL = WDTPW | WDTHOLD;
 
 	P1DIR = 0x00;
-    P1SEL0 = 0x00;
-    P1SEL1 = 0x00;
+	P1SEL0 = 0x00;
+	P1SEL1 = 0x00;
 
-    P2DIR |= (BIT6 | BIT5);
-    P2SEL0 = 0x00;
-    P2SEL1 = 0x00;
+	P2DIR |= (BIT6 | BIT5);
+	P2SEL0 = 0x00;
+	P2SEL1 = 0x00;
 
     PM5CTL0 &= ~LOCKLPM5;
     P2OUT &= ~(BIT6+BIT5);
@@ -24,16 +25,11 @@ int main(void)
     P1OUT &= ~(BIT3|BIT6|BIT7);
 
 
-    P1IES |= (BIT3|BIT6|BIT7);             // Interrupci髇 en flanco de bajada (cuando se presiona el bot髇)
-    P1IFG &= ~(BIT3|BIT6|BIT7);            // Limpiar bandera de interrupci髇
-    P1IE |= (BIT3|BIT6|BIT7);              // Habilitar interrupci髇 en P1.3
-
+    P1IES |= (BIT3|BIT6|BIT7);             // Interrupci贸n en flanco de bajada (cuando se presiona el bot贸n)
+    P1IFG &= ~(BIT3|BIT6|BIT7);            // Limpiar bandera de interrupci贸n
+    P1IE |= (BIT3|BIT6|BIT7);              // Habilitar interrupci贸n en P1.3
 
     __bis_SR_register(GIE);    // Habilitar interrupciones globales
-
-
-
-
 
     while(1)
     {
@@ -41,8 +37,7 @@ int main(void)
         {
             P2OUT &= ~BIT5;
         }
-
-
+	
         if(((P1IN & BIT2) == BIT2)&&((P1IN & BIT5) == 0)&&((P1IN & BIT4) == 0))
         {
             P2OUT |= BIT6;
@@ -57,8 +52,6 @@ int main(void)
         {
             P2OUT |= BIT6;
         }
-
-
     }
 }
 
