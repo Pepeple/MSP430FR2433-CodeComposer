@@ -1,3 +1,4 @@
+//Programa para controlar un motor y contar sus revolciones por segundo utilizando un sensor infrarojo
 #include <msp430.h> 
 #include <LCD16x2fr16MHz.h>
 
@@ -11,11 +12,6 @@ int main(void)
 {
 	WDTCTL = WDTPW | WDTHOLD;	// stop watchdog timer
 	DCO_16MHz_REFO();
-
-	//TA3CTL = TASSEL_1+MC_1+TAIE;
-	//TA3CCR0 = 32767;
-
-
 
 	TA0CTL = TASSEL_2+ID_3+MC_1+TAIE;
 	TA0CCR0 = 19999;
