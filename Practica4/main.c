@@ -1,3 +1,4 @@
+//Programa para hacer un dimer capturando las frecuencias de la señal de entrada y desproducinendola con un delay en la salida 
 #include <msp430.h>
 #include <LCD16x2fr16MHz.h>
 
